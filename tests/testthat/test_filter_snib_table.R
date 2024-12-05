@@ -5,6 +5,10 @@ describe("Filter SNIB table", {
     obtained <- get_observed_species_by_phylum(snib_table, phylum)
     expected_n_rows <- 3
     expect_equal(nrow(obtained), expected_n_rows)
+
+    expected_columns <- c("familiavalida", "especievalida")
+    obtained_columns <- colnames(obtained)
+    expect_equal(obtained_columns, expected_columns)
   })
   it("Filter table by phylum", {
     obtained <- filter_by_phylum(snib_table, phylum)
