@@ -1,5 +1,5 @@
-Package: templater
-Title: Template for R projects
+Package: geci.diversity
+Title: Biological diversity R package
 Authors@R: c(
     person(given = "Ciencia de Datos",
            family = "GECI",
@@ -7,15 +7,17 @@ Authors@R: c(
            email = "ciencia.datos@islas.org.mx"
            ))
 Config/testthat/edition: 3
-Description: Plantilla de Ciencia de Datos en GECI para proyectos en R
+Description: Índices de diversidad
 Encoding: UTF-8
 Imports:
     R6,
-    tidyverse
+    tidyverse,
+    reshape2,
+    vegan
 LazyData: true
 License: AGPL-3.0-or-later
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
 Suggests:
     devtools,
     roxygen2,
