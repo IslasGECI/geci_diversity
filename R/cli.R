@@ -11,3 +11,10 @@ write_jaccard_index_result <- function(options) {
     rjson::toJSON() |>
     write(options[["results_path"]])
 }
+
+write_list_of_species_on_both <- function(options) {
+  a_community <- readr::read_csv(options[["count-path-one"]], show_col_types = FALSE)
+  b_community <- readr::read_csv(options[["count-path-two"]], show_col_types = FALSE)
+  list_unique_species_on_both(a_community, b_community) |>
+    readr::write_csv(options[["results-path"]])
+}
