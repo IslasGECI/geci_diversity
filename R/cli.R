@@ -21,6 +21,10 @@ write_list_of_species_on_both <- function(options) {
 
 get_domain_specific_options <- function() {
   results_path <- geci.optparse::character_option(c("-r", "--results-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
-  option_names <- c(results_path)
+  newest_path <- geci.optparse::character_option(c("-n", "--newest-count-path"), default = "", help = "File path of the newest count")
+  previous_path <- geci.optparse::character_option(c("-p", "--previous-count-path"), default = "", help = "File path of the previous count")
+  count_path_one <- geci.optparse::character_option(c("-o", "--count-path-one"), default = "", help = "One file path to join")
+  count_path_two <- geci.optparse::character_option(c("-t", "--count-path-two"), default = "", help = "two file path to join")
+  option_names <- c(results_path, newest_path, previous_path, count_path_one, count_path_two)
   geci.optparse::get_options_from_vec(option_names)
 }
