@@ -18,6 +18,6 @@ describe("Cli for module", {
   it("Defines domain specific options", {
     obtained_options <- get_domain_specific_options()
     expected_options <- c("results-path", "newest-count-path", "previous-count-path", "count-path-one", "count-path-two")
-    expect_true(expected_options %in% names(obtained_options))
+    expect_true(all(expected_options %in% names(obtained_options)))
   })
 })
