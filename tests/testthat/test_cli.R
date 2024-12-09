@@ -18,6 +18,7 @@ describe("Cli for module", {
   it("Defines domain specific options", {
     obtained_options <- get_domain_specific_options()
     expected_options <- c("results-path")
-    expect_true(expected_options %in% obtained_options)
+    print(names(obtained_options))
+    expect_true(expected_options %in% names(obtained_options))
   })
 })
