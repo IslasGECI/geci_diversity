@@ -3,7 +3,7 @@ describe("Cli for module", {
   b_community_counts_path <- "/workdir/tests/data/community_b_for_tests.csv"
   it("Cli for Jaccard Index", {
     output_path <- "/workdir/tests/data/jaccard_diversity.json"
-    options <- list("newest_count_path" = a_community_counts_path, "previous_count_path" = b_community_counts_path, "results_path" = output_path)
+    options <- list("newest-count-path" = a_community_counts_path, "previous-count-path" = b_community_counts_path, "results-path" = output_path)
     testtools::if_exist_remove(output_path)
     write_jaccard_index_result(options)
     expect_true(testtools::exist_output_file(output_path))
