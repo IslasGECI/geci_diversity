@@ -10,7 +10,7 @@ Config/testthat/edition: 3
 Description: Índices de diversidad
 Encoding: UTF-8
 Imports:
-    geci.optparse,
+    gecioptparse,
     R6,
     tidyverse,
     rjson,
