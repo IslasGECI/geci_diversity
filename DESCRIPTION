@@ -1,4 +1,4 @@
-Package: geci.diversity
+Package: gecidiversity
 Title: Biological diversity R package
 Authors@R: c(
     person(given = "Ciencia de Datos",
@@ -10,19 +10,24 @@ Config/testthat/edition: 3
 Description: Índices de diversidad
 Encoding: UTF-8
 Imports:
+    dplyr,
     gecioptparse,
-    R6,
-    tidyverse,
-    rjson,
+    readr,
     reshape2,
-    vegan
+    rjson,
+    tibble,
+    vegan,
 LazyData: true
-License: AGPL-3.0-or-later
+License: AGPL (>= 3)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Suggests:
     devtools,
     roxygen2,
-    testthat
+    testthat,
+    testtools,
+Remotes:
+    IslasGECI/gecioptparse,
+    IslasGECI/testtools,
 Type: Package
 Version: 0.1.0
+Config/roxygen2/version: 8.0.0
