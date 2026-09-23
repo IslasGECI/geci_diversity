@@ -1,4 +1,12 @@
 services:
+  develop:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: islasgeci/geci_diversity_develop:latest
+    command: bash
+    volumes:
+      - $PWD:/workdir
   islasgeci:
     build:
       context: .
