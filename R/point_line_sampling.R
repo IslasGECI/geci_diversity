@@ -15,8 +15,7 @@ calculate_species_abundance_by_enclousure <- function(data) {
 
 calculate_stratum_abundance_by_enclousure <- function(data) {
   counts <- dplyr::count(data, Cerco, Estrato, name = "abundance")
-  vegetation <- dplyr::filter(data, Estrato %in% c("Herbáceo", "Semileñoso"))
-  vegetation_points <- dplyr::count(vegetation, Cerco, name = "vegetation_points")
-  dplyr::left_join(counts, vegetation_points, by = "Cerco") |>
-    dplyr::mutate(relative_abundance = abundance / vegetation_points)
+  total_points <- dplyr::count(data, Cerco, name = "number_of_points")
+  dplyr::left_join(counts, total_points, by = "Cerco") |>
+    dplyr::mutate(relative_abundance = abundance / number_of_points)
 }
