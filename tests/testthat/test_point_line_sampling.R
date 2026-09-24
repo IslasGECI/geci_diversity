@@ -5,10 +5,10 @@ describe("Point line sampling", {
     joined_data <- join_point_line_with_vegetation_metadata(point_line_data, vegetation_metadata)
     expected_columns <- c("Cerco", "Transecto", "Punto", "Distancia", "Especie", "Estrato")
     expect_equal(colnames(joined_data), expected_columns)
-    readr::write_csv(joined_data, "tests/data/point_line_data_with_stratum.csv")
+    readr::write_csv(joined_data, "/workdir/tests/data/point_line_data_with_stratum.csv")
   })
   it("species abundance by enclousure", {
-    data <- readr::read_csv("tests/data/point_line_data_with_stratum.csv")
+    data <- readr::read_csv("/workdir/tests/data/point_line_data_with_stratum.csv")
     obtained <- calculate_species_abundance_by_enclousure(data)
     obtained_canavalia_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Especie == "Canavalia rosea", ]
     expected_canavalia_abundace <- 4 / 12
