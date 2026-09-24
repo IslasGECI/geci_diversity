@@ -22,7 +22,8 @@ combine_bare_ground_strata <- function(data) {
 combine_vegetation_strata <- function(data) {
   is_vegetation <- data$Estrato %in% c("Herbáceo", "Semileñoso")
   data |>
-    dplyr::mutate(Estrato = dplyr::if_else(is_vegetation, "total_vegetation", Estrato))
+    dplyr::mutate(Estrato = dplyr::if_else(is_vegetation, "total_vegetation", Estrato)) |>
+    dplyr::filter(Estrato == "total_vegetation")
 }
 
 calculate_stratum_abundance_by_enclousure <- function(data) {
