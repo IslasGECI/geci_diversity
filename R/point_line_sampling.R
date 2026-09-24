@@ -13,10 +13,14 @@ calculate_species_abundance_by_enclousure <- function(data) {
   return(abundance)
 }
 
-calculate_stratum_abundance_by_enclousure <- function(data) {
+combine_bare_ground_strata <- function(data) {
   is_soil_or_rock <- data$Estrato %in% c("Suelo", "Roca")
-  renamed_stratum_df <- data |>
+  data |>
     dplyr::mutate(Estrato = dplyr::if_else(is_soil_or_rock, "Roca_Suelo", Estrato))
+}
+
+calculate_stratum_abundance_by_enclousure <- function(data) {
+  renamed_stratum_df <- combine_bare_ground_strata(data)
   counts <- dplyr::count(renamed_stratum_df, Cerco, Estrato, name = "abundance")
   total_points <- dplyr::count(renamed_stratum_df, Cerco, name = "number_of_points")
   stratum_abundance <- dplyr::left_join(counts, total_points, by = "Cerco") |>
