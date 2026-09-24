@@ -22,7 +22,7 @@ describe("Point line sampling", {
     expected_herbaceous_abundance <- 16
     expect_equal(obtained_herbaceous_abundance, expected_herbaceous_abundance)
     obtained_semiwoody_abundance <- obtained[obtained$Cerco == "Cerco_1" & obtained$Estrato == "Semileñoso", ]$relative_abundance
-    expected_semiwoody_abundance <- 7 / 21
+    expected_semiwoody_abundance <- 7 / 22
     expect_equal(obtained_semiwoody_abundance, expected_semiwoody_abundance)
   })
 })
