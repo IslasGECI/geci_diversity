@@ -1,5 +1,17 @@
 # Vegetation Analysis TODO
 
+## Progress
+
+- [x] Join line-intercept points with species/stratum metadata (`join_point_line_with_vegetation_metadata`).
+- [x] Compute species abundance by enclosure (`calculate_species_abundance_by_enclousure`).
+- [x] Compute strata abundance by enclosure (`calculate_stratum_abundance_by_enclousure`), including bare ground (`Roca_Suelo`) and total vegetation.
+- [x] Add line-intercept CLI writers (`write_species_abundance_from_line_intercept_by_enclosure`, `write_strata_abundance_from_line_intercept_by_enclosure`) and `--line-intercept-path` / `--species-stratum-path` options.
+- [ ] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure.
+- [ ] Implement quadrat cover, height, and diversity detail functions.
+- [ ] Implement enclosure-level quadrat summaries and pooled gamma diversity.
+- [ ] Add roxygen documentation and README examples.
+- [ ] Add Rscript CLI entry point and full CLI contract tests.
+
 ## Common agreement: scope and delivery boundary
 
 - Extend `gecidiversity` as a generic biological-diversity R package.
@@ -8,7 +20,7 @@
 - The first implementation increment contains composable numeric metric functions only.
 - Defer the high-level workflow contract, plotting, CLI orchestration, and file/report structure until the report design is decided.
 - Assume input data has already been validated upstream. Do not add schema mapping, alias configuration, or broad validation.
-- Keep the one explicit matching safeguard: stop with a clear error when a survey species has no species/stratum metadata row.
+- Do not include explicit matching safeguard for species that has no species/stratum metadata row. Assume data always has metadata for species/stratum.
 - Use English function names, output columns, and documentation while accepting the documented Spanish input columns.
 - Add roxygen documentation and concise README examples for the implemented API.
 - Use the existing testthat infrastructure, focused unit tests, and realistic Clarión-style fixtures. Add full CLI contract tests when CLI work begins.
@@ -18,9 +30,10 @@
 - Public analysis functions accept in-memory data frames/tibbles; later, the CLI will read three named CSVs.
 - Expose one function per result table rather than a monolithic report-producing function.
 - The planned first-increment function families are:
-  - four line-intercept summaries: species abundance, vegetation-group abundance, ground/litter abundance, and diversity;
-  - tidy quadrat cover, height, and diversity detail functions;
-  - separate enclosure-level cover, height, median per-quadrant diversity, and pooled gamma diversity summary functions.
+  - [x] line-intercept species abundance and vegetation-group abundance;
+  - [ ] line-intercept diversity indexes (Simpson and Shannon);
+  - [ ] tidy quadrat cover, height, and diversity detail functions;
+  - [ ] separate enclosure-level cover, height, median per-quadrant diversity, and pooled gamma diversity summary functions.
 - Helper functions remain internal unless a distinct public use case emerges.
 - High-level return structure remains intentionally deferred.
 
@@ -63,10 +76,9 @@
 - Calculate litter separately using `N_all`.
 - Return both raw counts and percentages.
 - Return four separate wide tables, with one row per enclosure:
-  1. species abundance;
-  2. vegetation-group abundance;
-  3. bare-ground and litter abundance;
-  4. vegetation richness and diversity.
+  1. [x] species abundance;
+  2. [x] vegetation-group abundance;
+  3. [ ] vegetation diversity.
 - Dynamic species/category headers are sanitized, alphabetically ordered, and clearly prefixed for count versus percent. Exact species text remains available in tidy outputs where applicable.
 - Species absent from an enclosure receive missing count/percent values in the wide intercept table.
 - Use `vegan` for diversity.
