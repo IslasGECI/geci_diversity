@@ -15,9 +15,21 @@ calculate_species_abundance_by_enclousure <- function(data) {
 
 calculate_stratum_abundance_by_enclousure <- function(data) {
   is_soil_or_rock <- data$Estrato %in% c("Suelo", "Roca")
-  renamed_stratum_df <- data |> dplyr::mutate(Estrato = dplyr::if_else(is_soil_or_rock, "Roca_Suelo", Estrato))
+  renamed_stratum_df <- data |>
+    dplyr::mutate(Estrato = dplyr::if_else(is_soil_or_rock, "Roca_Suelo", Estrato))
   counts <- dplyr::count(renamed_stratum_df, Cerco, Estrato, name = "abundance")
   total_points <- dplyr::count(renamed_stratum_df, Cerco, name = "number_of_points")
-  dplyr::left_join(counts, total_points, by = "Cerco") |>
+  stratum_abundance <- dplyr::left_join(counts, total_points, by = "Cerco") |>
     dplyr::mutate(relative_abundance = abundance / number_of_points)
+
+  vegetation_points <- dplyr::filter(renamed_stratum_df, Estrato %in% c("Herbáceo", "Semileñoso")) |>
+    dplyr::count(Cerco, name = "abundance")
+  total_vegetation <- dplyr::left_join(vegetation_points, total_points, by = "Cerco") |>
+    dplyr::mutate(
+      Estrato = "total_vegetation",
+      relative_abundance = abundance / number_of_points,
+      abundance = relative_abundance
+    )
+
+  dplyr::bind_rows(stratum_abundance, total_vegetation)
 }
