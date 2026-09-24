@@ -32,5 +32,7 @@ describe("Point line sampling", {
     expected_vegetation_relative_abundance <- 16 / 18
     expect_equal(obtained_vegetation_relative_abundance, expected_vegetation_relative_abundance)
     print(obtained)
+    is_there_rock_or_soil_as_strata <- any(c("Roca", "Suelo") %in% obtained$Estrato)
+    expect_false(is_there_rock_or_soil_as_strata)
   })
 })
