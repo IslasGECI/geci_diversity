@@ -10,6 +10,7 @@ describe("Point line sampling", {
     data <- readr::read_csv("/workdir/tests/data/point_line_data_with_stratum.csv")
     obtained <- calculate_species_abundance_by_enclousure(data)
     obtained_canavalia_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Especie == "Canavalia rosea", ]$abundancia
+    print(obtained_canavalia_abundance)
     expected_canavalia_abundace <- 4 / 12
     expect_equal(obtained_canavalia_abundance, expected_canavalia_abundace)
   })
