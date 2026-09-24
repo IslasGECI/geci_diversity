@@ -28,7 +28,6 @@ calculate_stratum_abundance_by_enclousure <- function(data) {
     dplyr::mutate(
       Estrato = "total_vegetation",
       relative_abundance = abundance / number_of_points,
-      abundance = relative_abundance
     )
 
   dplyr::bind_rows(stratum_abundance, total_vegetation)

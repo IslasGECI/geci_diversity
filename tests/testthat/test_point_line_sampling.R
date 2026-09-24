@@ -28,8 +28,8 @@ describe("Point line sampling", {
     obtained_soil_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Estrato == "Roca_Suelo", ]$abundance
     expected_soil_abundance <- 2
     expect_equal(obtained_soil_abundance, expected_soil_abundance)
-    obtained_vegetation_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Estrato == "total_vegetation", ]$abundance
-    expected_vegetation_abundance <- 16 / 18
-    expect_equal(obtained_vegetation_abundance, expected_vegetation_abundance)
+    obtained_vegetation_relative_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Estrato == "total_vegetation", ]$relative_abundance
+    expected_vegetation_relative_abundance <- 16 / 18
+    expect_equal(obtained_vegetation_relative_abundance, expected_vegetation_relative_abundance)
   })
 })
