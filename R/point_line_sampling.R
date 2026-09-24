@@ -9,6 +9,6 @@ calculate_species_abundance_by_enclousure <- function(data) {
   counts_by_enclosure <- dplyr::count(vegetation, Cerco, Especie, name = "number_of_individuals_by_species")
   vegetation_points <- dplyr::count(vegetation, Cerco, name = "vegetation_points")
   abundance <- dplyr::left_join(counts_by_enclosure, vegetation_points, by = "Cerco") |>
-    dplyr::mutate(abundance = number_of_individuals_by_species / vegetation_points)
+    dplyr::mutate(abundance = number_of_individuals_by_species, relative_abundance = number_of_individuals_by_species / vegetation_points)
   return(abundance)
 }

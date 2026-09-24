@@ -9,9 +9,11 @@ describe("Point line sampling", {
   it("species abundance by enclousure", {
     data <- readr::read_csv("/workdir/tests/data/point_line_data_with_stratum.csv")
     obtained <- calculate_species_abundance_by_enclousure(data)
-    obtained_canavalia_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Especie == "Canavalia rosea", ]$abundance
-    print(obtained)
+    obtained_canavalia_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Especie == "Canavalia rosea", ]$relative_abundance
     expected_canavalia_abundace <- 4 / 12
     expect_equal(obtained_canavalia_abundance, expected_canavalia_abundace)
+    obtained_tribulus_cistoides_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Especie == "Tribulus cistoides", ]$abundance
+    expected_tribulus_cistoides_abundance <- 7
+    expect_equal(obtained_tribulus_cistoides_abundance, expected_tribulus_cistoides_abundance)
   })
 })
