@@ -27,7 +27,7 @@ describe("Vegetation abundance", {
   it("write_species_abundance_by_enclousure", {
     output_path <- "/workdir/tests/species_abundance_from_line_intercept.csv"
     testtools::if_exist_remove(output_path)
-    options("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "output-path" = output_path)
+    options <- list("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "output-path" = output_path)
     write_species_abundance_from_line_intercept_by_enclosure(options)
     expect_true(testtools::exist_output_file(output_path))
   })
