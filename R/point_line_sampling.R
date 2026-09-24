@@ -12,3 +12,7 @@ calculate_species_abundance_by_enclousure <- function(data) {
     dplyr::mutate(abundance = number_of_individuals_by_species, relative_abundance = number_of_individuals_by_species / vegetation_points)
   return(abundance)
 }
+
+calculate_stratum_abundance_by_enclousure <- function(data) {
+  dplyr::count(data, Cerco, Estrato, name = "abundance")
+}
