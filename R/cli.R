@@ -19,6 +19,14 @@ write_list_of_species_on_both <- function(options) {
     readr::write_csv(options[["results-path"]])
 }
 
+write_species_abundance_from_line_intercept_by_enclosure <- function(options) {
+  line_intercept <- readr::read_csv(getOption("line-intercept-path"), show_col_types = FALSE)
+  species_stratum <- readr::read_csv(getOption("species-stratum-path"), show_col_types = FALSE)
+  point_line_with_stratum <- join_point_line_with_vegetation_metadata(line_intercept, species_stratum)
+  species_abundance <- calculate_species_abundance_by_enclousure(point_line_with_stratum)
+  readr::write_csv(species_abundance, getOption("output-path"))
+}
+
 get_domain_specific_options <- function() {
   results_path <- gecioptparse::character_option(c("-r", "--results-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
   newest_path <- gecioptparse::character_option(c("-n", "--newest-count-path"), default = "", help = "File path of the newest count")
