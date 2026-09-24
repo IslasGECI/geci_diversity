@@ -5,7 +5,6 @@ describe("Point line sampling", {
     joined_data <- join_point_line_with_vegetation_metadata(point_line_data, vegetation_metadata)
     expected_columns <- c("Cerco", "Transecto", "Punto", "Distancia", "Especie", "Estrato")
     expect_equal(colnames(joined_data), expected_columns)
-    readr::write_csv(joined_data, "/workdir/tests/data/point_line_data_with_stratum.csv")
   })
   it("species abundance by enclousure", {
     data <- readr::read_csv("/workdir/tests/data/point_line_data_with_stratum.csv")
