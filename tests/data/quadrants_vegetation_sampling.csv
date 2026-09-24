@@ -1,0 +1,28 @@
+Cerco,Cuadrante,Especie,Cobertura,Altura
+Cerco_2,1,Waltheria indica,5,45
+Cerco_2,1,Tribulus cistoides,40,10
+Cerco_2,1,Canavalia rosea,10,15
+Cerco_2,1,Suelo,45,NA
+Cerco_2,2,Waltheria indica,1,8
+Cerco_2,2,Tribulus cistoides,30,23
+Cerco_2,2,Canavalia rosea,5,21
+Cerco_2,2,Suelo,64,NA
+Cerco_2,3,Canavalia rosea,3,16
+Cerco_2,3,Tribulus cistoides,20,25
+Cerco_2,3,Suelo,77,NA
+Cerco_2,4,Waltheria indica,3,28
+Cerco_2,4,Tribulus cistoides,20,26
+Cerco_2,4,Canavalia rosea,10,28
+Cerco_1,7,Brickellia peninsularis,20,113
+Cerco_1,7,Tribulus cistoides,50,32
+Cerco_1,7,Canavalia rosea,1,13
+Cerco_1,7,Suelo,29,NA
+Cerco_1,8,Brickellia peninsularis,45,102
+Cerco_1,8,Tribulus cistoides,10,73
+Cerco_1,8,Suelo,45,NA
+Cerco_1,9,Tribulus cistoides,90,31
+Cerco_1,9,Canavalia rosea,3,9.5
+Cerco_1,9,Suelo,7,NA
+Cerco_1,10,Brickellia peninsularis,35,105
+Cerco_1,10,Tribulus cistoides,40,65
+Cerco_1,10,Suelo,25,NA
