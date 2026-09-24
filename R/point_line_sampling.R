@@ -14,12 +14,12 @@ calculate_species_abundance_by_enclousure <- function(data) {
 }
 
 calculate_stratum_abundance_by_enclousure <- function(data) {
-  data <- dplyr::mutate(
+  renamed_stratum_df <- dplyr::mutate(
     data,
     Estrato = dplyr::if_else(Estrato %in% c("Suelo", "Roca"), "Roca_Suelo", Estrato)
   )
-  counts <- dplyr::count(data, Cerco, Estrato, name = "abundance")
-  total_points <- dplyr::count(data, Cerco, name = "number_of_points")
+  counts <- dplyr::count(renamed_stratum_df, Cerco, Estrato, name = "abundance")
+  total_points <- dplyr::count(renamed_stratum_df, Cerco, name = "number_of_points")
   dplyr::left_join(counts, total_points, by = "Cerco") |>
     dplyr::mutate(relative_abundance = abundance / number_of_points)
 }
