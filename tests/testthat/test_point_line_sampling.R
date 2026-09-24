@@ -24,5 +24,9 @@ describe("Point line sampling", {
     obtained_semiwoody_abundance <- obtained[obtained$Cerco == "Cerco_1" & obtained$Estrato == "Semileñoso", ]$relative_abundance
     expected_semiwoody_abundance <- 7 / 22
     expect_equal(obtained_semiwoody_abundance, expected_semiwoody_abundance)
+    obtained <- calculate_stratum_abundance_by_enclousure(data)
+    obtained_soil_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Estrato == "Roca_Suelo", ]$abundance
+    expected_soil_abundance <- 2
+    expect_equal(obtained_soil_abundance, expected_soil_abundance)
   })
 })
