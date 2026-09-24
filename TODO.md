@@ -20,7 +20,7 @@
 - The planned first-increment function families are:
   - four line-intercept summaries: species abundance, vegetation-group abundance, ground/litter abundance, and diversity;
   - tidy quadrat cover, height, and diversity detail functions;
-  - separate enclosure-level cover, height, and diversity summary functions.
+  - separate enclosure-level cover, height, median per-quadrant diversity, and pooled gamma diversity summary functions.
 - Helper functions remain internal unless a distinct public use case emerges.
 - High-level return structure remains intentionally deferred.
 
@@ -28,6 +28,7 @@
 
 ### Line-intercept table
 
+- Data example at tests/data/points_line_sampling.csv
 - Use `Cerco`, `Transecto`, `Punto`, `Distancia`, and `Especie` as documented.
 - Each enclosure/transect/point combination represents exactly one surveyed point and has one row.
 - Aggregate results by enclosure only; transect identifies the point but is not an output grouping.
@@ -35,6 +36,7 @@
 
 ### Quadrat table
 
+- Data example at tests/data/quadrants_sampling.csv
 - Use `Cerco`, `Cuadrante`, `Especie`, `Cobertura`, and `Altura` as documented.
 - Assume one species/category coverage row per enclosure–quadrant combination.
 - Preserve the input height unit; do not convert or label it as centimeters, meters, or another unit.
@@ -42,6 +44,7 @@
 
 ### Species/stratum table
 
+- Data example at tests/data/species_stratum.csv
 - Join survey records to `Especie` and `Estrato` metadata.
 - Only `Herbáceo` and `Semileñoso` count as vegetation.
 - Combine `Suelo` and `Roca` as bare ground in summarized outputs.
@@ -80,8 +83,6 @@
 - Keep tidy per-quadrant results for cover, vegetation height, and diversity.
 - Also provide one additional wide table with one row per enclosure–quadrant and dynamic category columns.
 - The wide table includes:
-  - dynamic cover columns for all observed categories;
-  - dynamic height columns for vegetation categories only;
   - vegetation cover;
   - combined soil/rock bare-ground cover;
   - litter cover;
@@ -97,7 +98,7 @@
 ### Enclosure-level quadrat summaries
 
 - Every enclosure has more than one quadrat; implement a safe fallback for degenerate test input.
-- Use the median as the central estimate for every enclosure-level quadrat summary, replacing earlier mean-based wording.
+- Use the median as the central estimate for summaries calculated from per-quadrant cover, height, richness, Shannon, and Simpson values. Do not apply this rule to pooled gamma diversity.
 - Use percentile-bootstrap confidence intervals for all numeric enclosure summaries where estimable.
 - Default to 95% confidence and 2,000 resamples; expose confidence level and replicate count in public function arguments. CLI exposure is deferred with CLI work.
 - Use fixed seed 42 independently at the start of each public summary function, preserve the caller’s RNG state, and keep the seed fixed rather than exposing it.
@@ -106,9 +107,23 @@
 - Report both total quadrat count and presence count (`n_quadrats` and `n_present`).
 - Summarize every observed category and add grouped vegetation, combined soil/rock, litter, and total-cover estimates.
 - For species and mean vegetation height, summarize available per-quadrant values; do not turn absent species heights into zero.
-- Enclosure diversity is the median of per-quadrat richness, Shannon, and Simpson values, with bootstrap confidence intervals.
-- All enclosure-level cover, height, richness, Shannon, and Simpson summaries receive median plus lower/upper confidence bounds where estimable.
+- The median-based enclosure diversity table reports the median of per-quadrant richness, Shannon, and Simpson values, with bootstrap confidence intervals; keep it distinct from pooled gamma diversity.
+- All median-based enclosure-level cover, height, richness, Shannon, and Simpson summaries receive median plus lower/upper confidence bounds where estimable.
 - If only one usable quadrat or height value exists, return the observed estimate with missing interval bounds rather than a zero-width interval.
+
+### Pooled enclosure/gamma diversity
+
+- Return a separate gamma-diversity table with one row per enclosure; do not replace the per-quadrant or median-based enclosure results.
+- Build a complete enclosure–quadrant–vegetation-species cover matrix, treating a species absent from a quadrat as 0% cover.
+- Pool percent cover by summing each vegetation species’ `Cobertura` across quadrats within each enclosure. Use these pooled totals as abundance weights and normalize them to relative abundances; do not label the pooled totals as physical percent cover of the enclosure.
+- Calculate gamma richness as the number of vegetation species with positive pooled cover.
+- Calculate pooled gamma Shannon as `-sum(p * log2(p))` and pooled gamma Simpson as `1 - sum(p^2)`, using the normalized pooled vegetation abundances.
+- Exclude soil, rock, and litter from gamma richness, Shannon, and Simpson.
+- Do not calculate gamma diversity by averaging or summing the per-quadrant diversity indices.
+- Report `n_quadrats` together with gamma richness, Shannon, and Simpson in the gamma-diversity table.
+- Calculate gamma confidence intervals by resampling quadrats with replacement and recomputing the pooled cover totals and all three indices. Use the same confidence-level, resample-count, fixed-seed, and caller-RNG-state rules as the other enclosure summaries.
+- If an enclosure has no positive vegetation cover, report gamma richness as 0 and Shannon and Simpson as missing because relative abundance is undefined.
+- If only one usable quadrat exists, return the observed gamma estimate with missing interval bounds rather than a zero-width interval.
 
 ## Deferred visualization and CLI agreement
 
