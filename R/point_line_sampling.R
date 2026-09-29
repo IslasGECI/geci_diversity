@@ -26,6 +26,10 @@ combine_vegetation_strata <- function(data) {
 
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
+  initialized_community <- initialize_community_matrix(vegetation)
+  count_species_findings(initialized_community, vegetation)
+}
+initialize_community_matrix <- function(vegetation) {
   sites <- sort(unique(sanitize_site_names(vegetation)))
   sorted_species <- sort(unique(vegetation$Especie))
   species <- sanitize_species_names(sorted_species)
@@ -35,8 +39,9 @@ transform_intercept_enclosure_to_vegan <- function(point_line_data) {
     ncol = length(species),
     dimnames = list(sites, species)
   )
-  count_species_findings(community, vegetation)
+  return(community)
 }
+
 count_species_findings <- function(community, vegetation) {
   site_key <- sanitize_site_names(vegetation)
   species_key <- sanitize_species_names(vegetation$Especie)
