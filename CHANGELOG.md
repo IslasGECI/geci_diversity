@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `write_species_abundance_from_line_intercept_by_enclosure` command to write species abundance by enclosure from line-intercept sampling.
 - Add `write_strata_abundance_from_line_intercept_by_enclosure` command to write strata abundance (vegetation, bare ground, and total vegetation) by enclosure.
+- Add `write_diversity_indexes_by_transect` command to write Simpson and Shannon diversity indexes by enclosure transect.
 
 ## [0.1.0] - 2024-10-03
 
