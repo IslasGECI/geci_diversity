@@ -47,10 +47,11 @@ calculate_stratum_abundance_by_enclousure <- function(data) {
 }
 
 calculate_diversity_indexes <- function(sampling_data) {
-  index <- "simpson"
-  index_by_sample <- vegan::diversity(sampling_data, index)
-  df <- index_by_sample |> cbind()
-  colnames(df) <- index
+  index_list <- c("simpson", "shannon")
+  simpson_index <- vegan::diversity(sampling_data, index_list[1])
+  shannon_index <- vegan::diversity(sampling_data, index_list[2])
+  df <- cbind(simpson_index, shannon_index)
+  colnames(df) <- index_list
   return(df)
 }
 
