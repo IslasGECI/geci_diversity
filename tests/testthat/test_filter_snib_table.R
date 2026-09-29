@@ -1,5 +1,5 @@
 describe("Filter SNIB table", {
-  snib_table <- readr::read_csv("/workdir/tests/data/snib_table_for_tests.csv", show_col_type = FALSE)
+  snib_table <- readr::read_csv("/workdir/tests/data/snib_table_for_tests.csv", show_col_types = FALSE)
   phylum <- "Tracheophyta"
   it("Get unique list of species and family by phylum", {
     obtained <- get_observed_species_by_phylum(snib_table, phylum)

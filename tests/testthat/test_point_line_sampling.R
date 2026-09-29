@@ -1,5 +1,5 @@
 describe("Transform sampling data to vegan input format", {
-  point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv")
+  point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv", show_col_types = FALSE)
   obtained <- transform_intercept_enclosure_to_vegan(point_line_data)
   expected_columns_with_all_vegetation_species_on_data <- c("tribulus_cistoides", "brickellia_peninsularis", "waltheria_indica", "canavalia_rosea")
 
@@ -19,13 +19,13 @@ describe("Transform sampling data to vegan input format", {
 
 describe("Point line sampling", {
   it("Join point line data with vegetation metadata", {
-    point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv")
-    vegetation_metadata <- readr::read_csv("/workdir/tests/data/species_stratum.csv")
+    point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv", show_col_types = FALSE)
+    vegetation_metadata <- readr::read_csv("/workdir/tests/data/species_stratum.csv", show_col_types = FALSE)
     joined_data <- join_point_line_with_vegetation_metadata(point_line_data, vegetation_metadata)
     expected_columns <- c("Cerco", "Transecto", "Punto", "Distancia", "Especie", "Estrato")
     expect_equal(colnames(joined_data), expected_columns)
   })
-  data <- readr::read_csv("/workdir/tests/data/point_line_data_with_stratum.csv")
+  data <- readr::read_csv("/workdir/tests/data/point_line_data_with_stratum.csv", show_col_types = FALSE)
   it("species abundance by enclousure", {
     obtained <- calculate_species_abundance_by_enclousure(data)
     obtained_canavalia_relative_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Especie == "Canavalia rosea", ]$relative_abundance
