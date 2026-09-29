@@ -27,12 +27,20 @@ combine_vegetation_strata <- function(data) {
 }
 
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
-  split_by_site <- split(point_line_data, paste(point_line_data$Cerco, point_line_data$Transecto, sep = "_"))
-  lapply(split_by_site, function(site_data) {
-    species_counts <- table(site_data$Especie)
-    names(species_counts) <- gsub(" ", "_", tolower(names(species_counts)))
-    as.data.frame(as.list(species_counts))
-  })
+  sites <- sort(unique(paste(point_line_data$Cerco, point_line_data$Transecto, sep = "_")))
+  species <- gsub(" ", "_", tolower(sort(unique(point_line_data$Especie))))
+  community <- matrix(
+    0,
+    nrow = length(sites),
+    ncol = length(species),
+    dimnames = list(sites, species)
+  )
+  site_key <- paste(point_line_data$Cerco, point_line_data$Transecto, sep = "_")
+  species_key <- gsub(" ", "_", tolower(point_line_data$Especie))
+  for (i in seq_along(species_key)) {
+    community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + 1
+  }
+  community
 }
 
 calculate_stratum_abundance_by_enclousure <- function(data) {
