@@ -26,7 +26,7 @@ combine_vegetation_strata <- function(data) {
     dplyr::filter(Estrato == "total_vegetation")
 }
 
-transform_intercpect_enclosure_to_vegan <- function(point_line_data) {
+transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   split_by_site <- split(point_line_data, paste(point_line_data$Cerco, point_line_data$Transecto, sep = "_"))
   lapply(split_by_site, function(site_data) {
     species_counts <- table(site_data$Especie)

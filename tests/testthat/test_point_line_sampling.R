@@ -1,8 +1,9 @@
 describe("Transform sampling data to vegan input format", {
   point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv")
-  obtained <- transform_intercpect_enclosure_to_vegan(point_line_data)
+  obtained <- transform_intercept_enclosure_to_vegan(point_line_data)
   expected_columns <- c("tribulus_cistoides", "brickellia_peninsularis", "waltheria_indica")
   obtained_columns <- colnames(obtained)
+  print(obtained)
   expect_true(all(obtained_columns %in% expected_columns))
 
   obtained_count_in_cerco_1_transect_1_for_brickelia <- obtained[[1]]$brickellia_peninsularis
@@ -47,7 +48,6 @@ describe("Point line sampling", {
     obtained_vegetation_relative_abundance <- obtained[obtained$Cerco == "Cerco_2" & obtained$Estrato == "total_vegetation", ]$relative_abundance
     expected_vegetation_relative_abundance <- 16 / 18
     expect_equal(obtained_vegetation_relative_abundance, expected_vegetation_relative_abundance)
-    print(obtained)
     is_there_rock_or_soil_as_strata <- any(c("Roca", "Suelo") %in% obtained$Estrato)
     expect_false(is_there_rock_or_soil_as_strata)
   })
