@@ -27,9 +27,9 @@ combine_vegetation_strata <- function(data) {
 }
 
 transform_intercpect_enclosure_to_vegan <- function(point_line_data) {
-  split_by_transect <- split(point_line_data, point_line_data$Transecto)
-  lapply(split_by_transect, function(transect_data) {
-    species_counts <- table(transect_data$Especie)
+  split_by_site <- split(point_line_data, paste(point_line_data$Cerco, point_line_data$Transecto, sep = "_"))
+  lapply(split_by_site, function(site_data) {
+    species_counts <- table(site_data$Especie)
     names(species_counts) <- gsub(" ", "_", tolower(names(species_counts)))
     as.data.frame(as.list(species_counts))
   })
