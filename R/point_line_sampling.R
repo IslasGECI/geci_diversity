@@ -35,12 +35,15 @@ transform_intercept_enclosure_to_vegan <- function(point_line_data) {
     ncol = length(species),
     dimnames = list(sites, species)
   )
+  count_species_findings(community, vegetation)
+}
+count_species_findings <- function(community, vegetation) {
   site_key <- sanitize_site_names(vegetation)
   species_key <- sanitize_species_names(vegetation$Especie)
   for (i in seq_along(species_key)) {
     community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + 1
   }
-  community
+  return(community)
 }
 drop_non_vegetation <- function(point_line_data) {
   non_vegetation <- c("Suelo", "Roca", "Hojarasca")
