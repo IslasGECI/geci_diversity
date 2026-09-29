@@ -26,6 +26,15 @@ combine_vegetation_strata <- function(data) {
     dplyr::filter(Estrato == "total_vegetation")
 }
 
+transform_intercpect_enclosure_to_vegan <- function(point_line_data) {
+  split_by_transect <- split(point_line_data, point_line_data$Transecto)
+  lapply(split_by_transect, function(transect_data) {
+    species_counts <- table(transect_data$Especie)
+    names(species_counts) <- gsub(" ", "_", tolower(names(species_counts)))
+    as.data.frame(as.list(species_counts))
+  })
+}
+
 calculate_stratum_abundance_by_enclousure <- function(data) {
   renamed_strata <- combine_bare_ground_strata(data)
   counts <- dplyr::count(renamed_strata, Cerco, Estrato, name = "abundance")
