@@ -7,6 +7,7 @@ describe("Cli for module", {
     testtools::if_exist_remove(output_path)
     write_jaccard_index_result(options)
     expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
   })
   it("Cli for write_list_of_species_on_both", {
     output_path <- "/workdir/tests/data/unique_species_on_both_lists.csv"
@@ -14,11 +15,22 @@ describe("Cli for module", {
     testtools::if_exist_remove(output_path)
     write_list_of_species_on_both(options)
     expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
   })
   it("Defines domain specific options", {
     obtained_options <- get_domain_specific_options()
     expected_options <- c("results-path", "newest-count-path", "previous-count-path", "count-path-one", "count-path-two", "line-intercept-path", "species-stratum-path")
     expect_true(all(expected_options %in% names(obtained_options)))
+  })
+})
+describe("Vegetation diversity indexes", {
+  line_intercept_path <- "/workdir/tests/data/points_line_sampling.csv"
+  it("write_diversity_indexes_by_transect", {
+    output_path <- "/workdir/tests/diversity_index_from_line_intercept.csv"
+    testtools::if_exist_remove(output_path)
+    options <- list("line-intercept-path" = line_intercept_path, "results-path" = output_path)
+    write_diversity_indexes_by_transect(options)
+    expect_true(testtools::exist_output_file(output_path))
   })
 })
 describe("Vegetation abundance", {
@@ -30,6 +42,7 @@ describe("Vegetation abundance", {
     options <- list("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
     write_species_abundance_from_line_intercept_by_enclosure(options)
     expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
   })
   it("write_strata_abundance_from_line_intercept_by_enclosure", {
     output_path <- "/workdir/tests/strata_abundance_from_line_intercept.csv"
@@ -37,5 +50,6 @@ describe("Vegetation abundance", {
     options <- list("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
     write_strata_abundance_from_line_intercept_by_enclosure(options)
     expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
   })
 })
