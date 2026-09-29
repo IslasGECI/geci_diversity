@@ -1,10 +1,10 @@
 describe("Transform sampling data to vegan input format", {
   point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv")
   obtained <- transform_intercept_enclosure_to_vegan(point_line_data)
-  expected_columns <- c("tribulus_cistoides", "brickellia_peninsularis", "waltheria_indica")
+  expected_columns_with_all_vegetation_species_on_data <- c("tribulus_cistoides", "brickellia_peninsularis", "waltheria_indica", "canavalia_rosea")
   obtained_columns <- colnames(obtained)
   print(obtained)
-  expect_true(all(obtained_columns %in% expected_columns))
+  expect_true(all(expected_columns_with_all_vegetation_species_on_data %in% obtained_columns))
 
   obtained_count_in_cerco_1_transect_1_for_brickelia <- obtained[[1]]$brickellia_peninsularis
   expected_count_in_cerco_1_transect_1_for_brickelia <- 5
