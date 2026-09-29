@@ -46,6 +46,14 @@ calculate_stratum_abundance_by_enclousure <- function(data) {
   dplyr::bind_rows(stratum_abundance, total_vegetation)
 }
 
+calculate_diversity_indexes <- function(sampling_data) {
+  index <- "simpson"
+  index_by_sample <- vegan::diversity(sampling_data, index)
+  df <- index_by_sample |> cbind()
+  colnames(df) <- index
+  return(df)
+}
+
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
   initialized_community <- initialize_community_matrix(vegetation)
