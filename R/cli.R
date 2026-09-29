@@ -23,7 +23,9 @@ write_diversity_indexes_by_transect <- function(options) {
   line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
   vegan_input_format <- transform_intercept_enclosure_to_vegan(line_intercept)
   diversity_indexes <- calculate_diversity_indexes(vegan_input_format)
-  readr::write_csv(tibble::as_tibble(diversity_indexes), options[["results-path"]])
+  df <- diversity_indexes |>
+    tibble::as_tibble(rownames = "enclosure_transect")
+  readr::write_csv(df, options[["results-path"]])
 }
 
 write_species_abundance_from_line_intercept_by_enclosure <- function(options) {
