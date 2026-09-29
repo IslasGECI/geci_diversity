@@ -1,3 +1,11 @@
+describe("Transform sampling data to vegan input format", {
+  point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv")
+  obtained <- transform_intercpect_enclosure_to_vegan(point_line_data)
+  expected_columns <- c("tribulus_cistoides", "brickellia_peninsularis", "waltheria_indica")
+  obtained_columns <- colnames(obtained)
+  expect_true(all(obtained_columns %in% expected_columns))
+})
+
 describe("Point line sampling", {
   it("Join point line data with vegetation metadata", {
     point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv")
