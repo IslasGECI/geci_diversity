@@ -6,6 +6,7 @@
 - [x] Compute species abundance by enclosure (`calculate_species_abundance_by_enclousure`).
 - [x] Compute strata abundance by enclosure (`calculate_stratum_abundance_by_enclousure`), including bare ground (`Roca_Suelo`) and total vegetation.
 - [x] Add line-intercept CLI writers (`write_species_abundance_from_line_intercept_by_enclosure`, `write_strata_abundance_from_line_intercept_by_enclosure`) and `--line-intercept-path` / `--species-stratum-path` options.
+- [x] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure and transect.
 - [ ] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure.
 - [ ] Implement quadrat cover, height, and diversity detail functions.
 - [ ] Implement enclosure-level quadrat summaries and pooled gamma diversity.
