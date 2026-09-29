@@ -27,7 +27,8 @@ combine_vegetation_strata <- function(data) {
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
   sites <- sort(unique(paste(vegetation$Cerco, vegetation$Transecto, sep = "_")))
-  species <- gsub(" ", "_", tolower(sort(unique(vegetation$Especie))))
+  sorted_species <- sort(unique(vegetation$Especie))
+  species <- sanitize_species_names(sorted_species)
   community <- matrix(
     0,
     nrow = length(sites),
@@ -35,7 +36,7 @@ transform_intercept_enclosure_to_vegan <- function(point_line_data) {
     dimnames = list(sites, species)
   )
   site_key <- paste(vegetation$Cerco, vegetation$Transecto, sep = "_")
-  species_key <- gsub(" ", "_", tolower(vegetation$Especie))
+  species_key <- sanitize_species_names(vegetation$Especie)
   for (i in seq_along(species_key)) {
     community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + 1
   }
@@ -45,6 +46,9 @@ drop_non_vegetation <- function(point_line_data) {
   non_vegetation <- c("Suelo", "Roca", "Hojarasca")
   vegetation <- point_line_data[!point_line_data$Especie %in% non_vegetation, ]
   return(vegetation)
+}
+sanitize_species_names <- function(species_names) {
+  gsub(" ", "_", tolower(species_names))
 }
 
 calculate_stratum_abundance_by_enclousure <- function(data) {
