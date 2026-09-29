@@ -19,6 +19,13 @@ write_list_of_species_on_both <- function(options) {
     readr::write_csv(options[["results-path"]])
 }
 
+write_diversity_indexes_by_transect <- function(options) {
+  line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
+  vegan_input_format <- transform_intercept_enclosure_to_vegan(line_intercept)
+  diversity_indexes <- calculate_diversity_indexes(vegan_input_format)
+  readr::write_csv(tibble::as_tibble(diversity_indexes), options[["results-path"]])
+}
+
 write_species_abundance_from_line_intercept_by_enclosure <- function(options) {
   line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
   species_stratum <- readr::read_csv(options[["species-stratum-path"]], show_col_types = FALSE)
