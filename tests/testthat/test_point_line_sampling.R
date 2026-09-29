@@ -1,6 +1,9 @@
 describe("Calculate diversity indexes", {
   intercept_enclosure_data <- read.csv("/workdir/tests/data/enclosure_transects_vegan_input_format.csv", row.names = "cerco")
   obtained <- calculate_diversity_indexes(intercept_enclosure_data)
+  obtained_simpson_value <- obtained["Cerco_2_2", "shannon"]
+  expected_simpson_value <- 0.4505612
+  expect_equal(obtained_simpson_value, expected_simpson_value)
   obtained_simpson_value <- obtained["Cerco_1_1", "simpson"]
   expected_simpson_value <- 0.62
   expect_equal(obtained_simpson_value, expected_simpson_value)
