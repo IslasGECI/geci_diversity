@@ -27,16 +27,18 @@ combine_vegetation_strata <- function(data) {
 }
 
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
-  sites <- sort(unique(paste(point_line_data$Cerco, point_line_data$Transecto, sep = "_")))
-  species <- gsub(" ", "_", tolower(sort(unique(point_line_data$Especie))))
+  non_vegetation <- c("Suelo", "Roca", "Hojarasca")
+  vegetation <- point_line_data[!point_line_data$Especie %in% non_vegetation, ]
+  sites <- sort(unique(paste(vegetation$Cerco, vegetation$Transecto, sep = "_")))
+  species <- gsub(" ", "_", tolower(sort(unique(vegetation$Especie))))
   community <- matrix(
     0,
     nrow = length(sites),
     ncol = length(species),
     dimnames = list(sites, species)
   )
-  site_key <- paste(point_line_data$Cerco, point_line_data$Transecto, sep = "_")
-  species_key <- gsub(" ", "_", tolower(point_line_data$Especie))
+  site_key <- paste(vegetation$Cerco, vegetation$Transecto, sep = "_")
+  species_key <- gsub(" ", "_", tolower(vegetation$Especie))
   for (i in seq_along(species_key)) {
     community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + 1
   }
