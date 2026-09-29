@@ -4,6 +4,9 @@ describe("Transform sampling data to vegan input format", {
   expected_columns <- c("tribulus_cistoides", "brickellia_peninsularis", "waltheria_indica")
   obtained_columns <- colnames(obtained)
   expect_true(all(obtained_columns %in% expected_columns))
+  obtained_count_in_transect_1_for_brickelia <- obtained[[1]]$brickellia_peninsularis
+  expected_count_in_transect_1_for_brickelia <- 5
+  expect_equal(obtained_count_in_transect_1_for_brickelia, expected_count_in_transect_1_for_brickelia)
 })
 
 describe("Point line sampling", {
