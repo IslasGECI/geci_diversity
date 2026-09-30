@@ -24,8 +24,8 @@ describe("Cli for module", {
   })
 })
 describe("Vegetation diversity indexes", {
-  line_intercept_path <- "/workdir/tests/data/points_line_sampling.csv"
-  it("write_diversity_indexes_by_enclosure", {
+  it("write_diversity_indexes_by_enclosure from line-intercept", {
+    line_intercept_path <- "/workdir/tests/data/points_line_sampling.csv"
     output_path <- "/workdir/tests/diversity_index_from_line_intercept_by_enclosure.csv"
     testtools::if_exist_remove(output_path)
     options <- list("line-intercept-path" = line_intercept_path, "results-path" = output_path)
@@ -33,13 +33,21 @@ describe("Vegetation diversity indexes", {
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)
   })
+  quadrants_path <- "/workdir/tests/data/quadrants_vegetation_sampling.csv"
+  it("write_diversity_indexes_by_enclosure from quadrants", {
+    output_path <- "/workdir/tests/diversity_index_from_line_intercept_by_enclosure.csv"
+    testtools::if_exist_remove(output_path)
+    options <- list("sampling-data-path" = quadrants_path, "results-path" = output_path)
+    write_diversity_indexes_by_enclosure_from_coverage(options)
+    expect_true(testtools::exist_output_file(output_path))
+  })
   it("write_diversity_indexes_by_quadrant", {
     output_path <- "/workdir/tests/diversity_index_by_quadrants.csv"
     testtools::if_exist_remove(output_path)
-    quadrants_path <- "/workdir/tests/data/quadrants_vegetation_sampling.csv"
     options <- list("sampling-data-path" = quadrants_path, "results-path" = output_path)
     write_diversity_indexes_by_quadrant(options)
     expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
   })
   it("write_diversity_indexes_by_transect", {
     output_path <- "/workdir/tests/diversity_index_from_line_intercept_by_transect.csv"
