@@ -31,17 +31,19 @@ write_diversity_indexes_by_enclosure <- function(options) {
   line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
   vegan_input_format <- transform_enclosure_to_vegan(line_intercept)
   diversity_indexes <- calculate_diversity_indexes(vegan_input_format)
-  df <- diversity_indexes |>
-    tibble::as_tibble(rownames = "enclosure")
-  readr::write_csv(df, options[["results-path"]])
+  format_diversity_by_enclosure_table(diversity_indexes) |>
+    readr::write_csv(options[["results-path"]])
 }
 write_diversity_indexes_by_enclosure_from_coverage <- function(options) {
   quadrants_data <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
   vegan_input_format <- transform_enclosure_coverage_to_vegan(quadrants_data)
   diversity_indexes <- calculate_diversity_indexes(vegan_input_format)
-  df <- diversity_indexes |>
+  format_diversity_by_enclosure_table(diversity_indexes) |>
+    readr::write_csv(options[["results-path"]])
+}
+format_diversity_by_enclosure_table <- function(diversity_indexes) {
+  diversity_indexes |>
     tibble::as_tibble(rownames = "enclosure")
-  readr::write_csv(df, options[["results-path"]])
 }
 write_diversity_indexes_by_quadrant <- function(options) {
   quadrants_data <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
