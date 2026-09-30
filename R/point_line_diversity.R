@@ -6,7 +6,16 @@ calculate_diversity_indexes <- function(sampling_data) {
   colnames(df) <- index_list
   return(df)
 }
-
+transform_quadrants_enclosure_to_vegan <- function(quadrants_data) {
+  vegetation <- drop_non_vegetation(quadrants_data)
+  sites <- sanitize_enclousure_quadrants_names(vegetation)
+  community <- initialize_community_matrix(vegetation, sites)
+  species_key <- sanitize_species_names(vegetation$Especie)
+  for (i in seq_along(species_key)) {
+    community[sites[i], species_key[i]] <- vegetation$Cobertura[i]
+  }
+  return(community)
+}
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
   sites <- sanitize_enclousure_transect_names(vegetation)
@@ -22,7 +31,6 @@ transform_enclosure_to_vegan <- function(point_line_data) {
 
 initialize_community_matrix <- function(vegetation, sites) {
   unique_and_sorted_sites <- sort(unique(sites))
-  print(unique_and_sorted_sites)
   sorted_species <- sort(unique(vegetation$Especie))
   species <- sanitize_species_names(sorted_species)
   community <- matrix(
@@ -47,13 +55,6 @@ sanitize_species_names <- function(species_names) {
 sanitize_enclousure_transect_names <- function(vegetation) {
   paste(vegetation$Cerco, vegetation$Transecto, sep = "_")
 }
-transform_quadrants_enclosure_to_vegan <- function(quadrants_data) {
-  vegetation <- drop_non_vegetation(quadrants_data)
-  sites <- paste(vegetation$Cerco, vegetation$Cuadrante, sep = "_")
-  community <- initialize_community_matrix(vegetation, sites)
-  species_key <- sanitize_species_names(vegetation$Especie)
-  for (i in seq_along(species_key)) {
-    community[sites[i], species_key[i]] <- vegetation$Cobertura[i]
-  }
-  return(community)
+sanitize_enclousure_quadrants_names <- function(vegetation) {
+  paste(vegetation$Cerco, vegetation$Cuadrante, sep = "_")
 }
