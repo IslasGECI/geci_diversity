@@ -31,6 +31,7 @@ describe("Vegetation diversity indexes", {
     options <- list("line-intercept-path" = line_intercept_path, "results-path" = output_path)
     write_diversity_indexes_by_transect(options)
     expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
   })
 })
 describe("Vegetation abundance", {
