@@ -9,12 +9,8 @@ calculate_diversity_indexes <- function(sampling_data) {
 transform_quadrants_enclosure_to_vegan <- function(quadrants_data) {
   vegetation <- drop_non_vegetation(quadrants_data)
   sites <- sanitize_enclousure_quadrants_names(vegetation)
-  community <- initialize_community_matrix(vegetation, sites)
-  species_key <- sanitize_species_names(vegetation$Especie)
-  for (i in seq_along(species_key)) {
-    community[sites[i], species_key[i]] <- vegetation$Cobertura[i]
-  }
-  return(community)
+  initialized_community <- initialize_community_matrix(vegetation, sites)
+  count_species_coverage(initialized_community, vegetation, sites)
 }
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
@@ -46,6 +42,13 @@ count_sighted_species <- function(community, vegetation, site_key) {
   species_key <- sanitize_species_names(vegetation$Especie)
   for (i in seq_along(species_key)) {
     community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + 1
+  }
+  return(community)
+}
+count_species_coverage <- function(community, vegetation, site_key) {
+  species_key <- sanitize_species_names(vegetation$Especie)
+  for (i in seq_along(species_key)) {
+    community[site_key[i], species_key[i]] <- vegetation$Cobertura[i]
   }
   return(community)
 }
