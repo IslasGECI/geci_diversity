@@ -54,7 +54,7 @@ describe("Transform quadrants sampling data to vegan input format", {
     is_all_expected_columns_in_obtained <- all(expected_columns_with_all_vegetation_species_on_data %in% obtained_columns)
     is_all_obtained_columns_in_expected <- all(obtained_columns %in% expected_columns_with_all_vegetation_species_on_data)
     expect_true(is_all_expected_columns_in_obtained & is_all_obtained_columns_in_expected)
-    expected_rows <- 16
+    expected_rows <- 8
     obtained_rows <- nrow(obtained)
     expect_equal(obtained_rows, expected_rows)
 

@@ -22,6 +22,7 @@ transform_enclosure_to_vegan <- function(point_line_data) {
 
 initialize_community_matrix <- function(vegetation, sites) {
   unique_and_sorted_sites <- sort(unique(sites))
+  print(unique_and_sorted_sites)
   sorted_species <- sort(unique(vegetation$Especie))
   species <- sanitize_species_names(sorted_species)
   community <- matrix(
@@ -48,14 +49,11 @@ sanitize_enclousure_transect_names <- function(vegetation) {
 }
 transform_quadrants_enclosure_to_vegan <- function(quadrants_data) {
   vegetation <- drop_non_vegetation(quadrants_data)
-  all_enclosures <- sort(unique(vegetation$Cerco))
-  all_quadrants <- sort(unique(vegetation$Cuadrante))
-  sites <- as.vector(outer(all_enclosures, all_quadrants, paste, sep = "_"))
+  sites <- paste(vegetation$Cerco, vegetation$Cuadrante, sep = "_")
   community <- initialize_community_matrix(vegetation, sites)
-  site_key <- paste(vegetation$Cerco, vegetation$Cuadrante, sep = "_")
   species_key <- sanitize_species_names(vegetation$Especie)
   for (i in seq_along(species_key)) {
-    community[site_key[i], species_key[i]] <- vegetation$Cobertura[i]
+    community[sites[i], species_key[i]] <- vegetation$Cobertura[i]
   }
   return(community)
 }
