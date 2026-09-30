@@ -33,6 +33,14 @@ describe("Vegetation diversity indexes", {
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)
   })
+  it("write_diversity_indexes_by_quadrant", {
+    output_path <- "/workdir/tests/diversity_index_by_quadrants.csv"
+    testtools::if_exist_remove(output_path)
+    quadrants_path <- "/workdir/tests/data/quadrants_vegetation_sampling.csv"
+    options <- list("sampling-data-path" = quadrants_path, "results-path" = output_path)
+    write_diversity_indexes_by_quadrant(options)
+    expect_true(testtools::exist_output_file(output_path))
+  })
   it("write_diversity_indexes_by_transect", {
     output_path <- "/workdir/tests/diversity_index_from_line_intercept_by_transect.csv"
     testtools::if_exist_remove(output_path)
