@@ -46,3 +46,16 @@ sanitize_species_names <- function(species_names) {
 sanitize_enclousure_transect_names <- function(vegetation) {
   paste(vegetation$Cerco, vegetation$Transecto, sep = "_")
 }
+transform_quadrants_enclosure_to_vegan <- function(quadrants_data) {
+  vegetation <- drop_non_vegetation(quadrants_data)
+  all_enclosures <- sort(unique(vegetation$Cerco))
+  all_quadrants <- sort(unique(vegetation$Cuadrante))
+  sites <- as.vector(outer(all_enclosures, all_quadrants, paste, sep = "_"))
+  community <- initialize_community_matrix(vegetation, sites)
+  site_key <- paste(vegetation$Cerco, vegetation$Cuadrante, sep = "_")
+  species_key <- sanitize_species_names(vegetation$Especie)
+  for (i in seq_along(species_key)) {
+    community[site_key[i], species_key[i]] <- vegetation$Cobertura[i]
+  }
+  return(community)
+}
