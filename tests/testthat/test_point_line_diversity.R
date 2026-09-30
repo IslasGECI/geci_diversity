@@ -70,6 +70,9 @@ describe("Transform quadrants sampling data to vegan input format", {
     is_all_expected_columns_in_obtained <- all(expected_columns_with_all_vegetation_species_on_data %in% obtained_columns)
     is_all_obtained_columns_in_expected <- all(obtained_columns %in% expected_columns_with_all_vegetation_species_on_data)
     expect_true(is_all_expected_columns_in_obtained & is_all_obtained_columns_in_expected)
+    expected_rows <- 2
+    obtained_rows <- nrow(obtained)
+    expect_equal(obtained_rows, expected_rows)
 
     obtained_count_in_cerco_1_for_brickelia <- obtained["Cerco_1", "brickellia_peninsularis"][[1]]
     expected_count_in_cerco_1_for_brickelia <- 100
