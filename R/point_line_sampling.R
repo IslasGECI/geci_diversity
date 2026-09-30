@@ -66,11 +66,9 @@ transform_enclosure_to_vegan <- function(point_line_data) {
   sites <- vegetation$Cerco
   community <- initialize_community_matrix(vegetation, sites)
   species_key <- sanitize_species_names(vegetation$Especie)
-  for (i in seq_along(species_key)) {
-    community[vegetation$Cerco[i], species_key[i]] <- community[vegetation$Cerco[i], species_key[i]] + 1
-  }
-  return(community)
+  count_sighted_species(community, vegetation, sites)
 }
+
 initialize_community_matrix <- function(vegetation, sites) {
   unique_and_sorted_sites <- sort(unique(sites))
   sorted_species <- sort(unique(vegetation$Especie))
