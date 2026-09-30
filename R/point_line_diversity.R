@@ -26,9 +26,9 @@ initialize_community_matrix <- function(vegetation, sites) {
   species <- sanitize_species_names(sorted_species)
   community <- matrix(
     0,
-    nrow = length(sites),
+    nrow = length(unique_and_sorted_sites),
     ncol = length(species),
-    dimnames = list(sites, species)
+    dimnames = list(unique_and_sorted_sites, species)
   )
   return(community)
 }
