@@ -60,7 +60,7 @@ count_sighted_species <- function(community, vegetation, site_key) {
 count_species_coverage <- function(community, vegetation, site_key) {
   species_key <- sanitize_species_names(vegetation$Especie)
   for (i in seq_along(species_key)) {
-    community[site_key[i], species_key[i]] <- vegetation$Cobertura[i]
+    community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + vegetation$Cobertura[i]
   }
   return(community)
 }
