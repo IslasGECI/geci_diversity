@@ -61,3 +61,15 @@ sanitize_enclousure_transect_names <- function(vegetation) {
 sanitize_enclousure_quadrants_names <- function(vegetation) {
   paste(vegetation$Cerco, vegetation$Cuadrante, sep = "_")
 }
+transform_enclosure_coverage_to_vegan <- function(quadrants_data) {
+  vegetation <- drop_non_vegetation(quadrants_data)
+  sites <- sort(unique(vegetation$Cerco))
+  community <- initialize_community_matrix(vegetation, sites)
+  species_key <- sanitize_species_names(vegetation$Especie)
+  for (i in seq_along(species_key)) {
+    enclosure <- vegetation$Cerco[i]
+    species <- species_key[i]
+    community[enclosure, species] <- community[enclosure, species] + vegetation$Cobertura[i]
+  }
+  return(community)
+}
