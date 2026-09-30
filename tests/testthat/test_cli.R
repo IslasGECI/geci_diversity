@@ -48,15 +48,15 @@ describe("Vegetation abundance", {
     output_path <- "/workdir/tests/species_abundance_from_line_intercept.csv"
     testtools::if_exist_remove(output_path)
     options <- list("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
-    write_species_abundance_from_line_intercept_by_enclosure(options)
+    write_species_abundance_by_enclosure(options)
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)
   })
-  it("write_strata_abundance_from_line_intercept_by_enclosure", {
+  it("write_strata_abundance_by_enclosure", {
     output_path <- "/workdir/tests/strata_abundance_from_line_intercept.csv"
     testtools::if_exist_remove(output_path)
     options <- list("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
-    write_strata_abundance_from_line_intercept_by_enclosure(options)
+    write_strata_abundance_by_enclosure(options)
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)
   })

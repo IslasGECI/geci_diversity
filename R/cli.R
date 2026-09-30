@@ -36,7 +36,7 @@ write_diversity_indexes_by_enclosure <- function(options) {
   readr::write_csv(df, options[["results-path"]])
 }
 
-write_species_abundance_from_line_intercept_by_enclosure <- function(options) {
+write_species_abundance_by_enclosure <- function(options) {
   line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
   species_stratum <- readr::read_csv(options[["species-stratum-path"]], show_col_types = FALSE)
   point_line_with_stratum <- join_point_line_with_vegetation_metadata(line_intercept, species_stratum)
@@ -44,7 +44,7 @@ write_species_abundance_from_line_intercept_by_enclosure <- function(options) {
   readr::write_csv(species_abundance, options[["results-path"]])
 }
 
-write_strata_abundance_from_line_intercept_by_enclosure <- function(options) {
+write_strata_abundance_by_enclosure <- function(options) {
   line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
   species_stratum <- readr::read_csv(options[["species-stratum-path"]], show_col_types = FALSE)
   point_line_with_stratum <- join_point_line_with_vegetation_metadata(line_intercept, species_stratum)
