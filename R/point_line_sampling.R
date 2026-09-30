@@ -65,7 +65,6 @@ transform_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
   sites <- vegetation$Cerco
   community <- initialize_community_matrix(vegetation, sites)
-  species_key <- sanitize_species_names(vegetation$Especie)
   count_sighted_species(community, vegetation, sites)
 }
 
