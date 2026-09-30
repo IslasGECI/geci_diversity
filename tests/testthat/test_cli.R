@@ -19,7 +19,7 @@ describe("Cli for module", {
   })
   it("Defines domain specific options", {
     obtained_options <- get_domain_specific_options()
-    expected_options <- c("results-path", "newest-count-path", "previous-count-path", "count-path-one", "count-path-two", "line-intercept-path", "species-stratum-path")
+    expected_options <- c("results-path", "newest-count-path", "previous-count-path", "count-path-one", "count-path-two", "line-intercept-path", "sampling-data-path", "species-stratum-path")
     expect_true(all(expected_options %in% names(obtained_options)))
   })
 })
@@ -47,7 +47,7 @@ describe("Vegetation abundance", {
   it("write_species_abundance_by_enclousure", {
     output_path <- "/workdir/tests/species_abundance_from_line_intercept.csv"
     testtools::if_exist_remove(output_path)
-    options <- list("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
+    options <- list("sampling-data-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
     write_species_abundance_by_enclosure(options)
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)
@@ -55,7 +55,7 @@ describe("Vegetation abundance", {
   it("write_strata_abundance_by_enclosure", {
     output_path <- "/workdir/tests/strata_abundance_from_line_intercept.csv"
     testtools::if_exist_remove(output_path)
-    options <- list("line-intercept-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
+    options <- list("sampling-data-path" = line_intercept_path, "species-stratum-path" = species_stratum_path, "results-path" = output_path)
     write_strata_abundance_by_enclosure(options)
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)

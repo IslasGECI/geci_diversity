@@ -37,7 +37,7 @@ write_diversity_indexes_by_enclosure <- function(options) {
 }
 
 write_species_abundance_by_enclosure <- function(options) {
-  line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
+  line_intercept <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
   species_stratum <- readr::read_csv(options[["species-stratum-path"]], show_col_types = FALSE)
   point_line_with_stratum <- join_sampling_with_vegetation_metadata(line_intercept, species_stratum)
   species_abundance <- calculate_species_abundance_by_enclousure(point_line_with_stratum)
@@ -45,7 +45,7 @@ write_species_abundance_by_enclosure <- function(options) {
 }
 
 write_strata_abundance_by_enclosure <- function(options) {
-  line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
+  line_intercept <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
   species_stratum <- readr::read_csv(options[["species-stratum-path"]], show_col_types = FALSE)
   point_line_with_stratum <- join_sampling_with_vegetation_metadata(line_intercept, species_stratum)
   strata_abundance <- calculate_stratum_abundance_by_enclousure(point_line_with_stratum)
@@ -57,8 +57,9 @@ get_domain_specific_options <- function() {
   previous_path <- gecioptparse::character_option(c("-p", "--previous-count-path"), default = "", help = "File path of the previous count")
   count_path_one <- gecioptparse::character_option(c("-o", "--count-path-one"), default = "", help = "One file path to join")
   count_path_two <- gecioptparse::character_option(c("-t", "--count-path-two"), default = "", help = "two file path to join")
+  sampling_data_path <- gecioptparse::character_option(c("-d", "--sampling-data-path"), default = "", help = "File path of the sampling data")
   line_intercept_path <- gecioptparse::character_option(c("-i", "--line-intercept-path"), default = "", help = "File path of the line intercept sampling")
   species_stratum_path <- gecioptparse::character_option(c("-s", "--species-stratum-path"), default = "", help = "File path of the species and stratum metadata")
-  option_names <- c(results_path, newest_path, previous_path, count_path_one, count_path_two, line_intercept_path, species_stratum_path)
+  option_names <- c(results_path, newest_path, previous_path, count_path_one, count_path_two, sampling_data_path, line_intercept_path, species_stratum_path)
   gecioptparse::get_options_from_vec(option_names)
 }
