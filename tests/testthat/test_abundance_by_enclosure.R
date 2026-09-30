@@ -1,4 +1,4 @@
-describe("Point line sampling", {
+describe("Abundance by enclosure", {
   it("Join point line data with vegetation metadata", {
     point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv", show_col_types = FALSE)
     vegetation_metadata <- readr::read_csv("/workdir/tests/data/species_stratum.csv", show_col_types = FALSE)
