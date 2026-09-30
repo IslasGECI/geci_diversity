@@ -47,7 +47,7 @@ describe("Point line sampling", {
   it("Join point line data with vegetation metadata", {
     point_line_data <- readr::read_csv("/workdir/tests/data/points_line_sampling.csv", show_col_types = FALSE)
     vegetation_metadata <- readr::read_csv("/workdir/tests/data/species_stratum.csv", show_col_types = FALSE)
-    joined_data <- join_point_line_with_vegetation_metadata(point_line_data, vegetation_metadata)
+    joined_data <- join_sampling_with_vegetation_metadata(point_line_data, vegetation_metadata)
     expected_columns <- c("Cerco", "Transecto", "Punto", "Distancia", "Especie", "Estrato")
     expect_equal(colnames(joined_data), expected_columns)
   })

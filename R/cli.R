@@ -39,7 +39,7 @@ write_diversity_indexes_by_enclosure <- function(options) {
 write_species_abundance_by_enclosure <- function(options) {
   line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
   species_stratum <- readr::read_csv(options[["species-stratum-path"]], show_col_types = FALSE)
-  point_line_with_stratum <- join_point_line_with_vegetation_metadata(line_intercept, species_stratum)
+  point_line_with_stratum <- join_sampling_with_vegetation_metadata(line_intercept, species_stratum)
   species_abundance <- calculate_species_abundance_by_enclousure(point_line_with_stratum)
   readr::write_csv(species_abundance, options[["results-path"]])
 }
@@ -47,7 +47,7 @@ write_species_abundance_by_enclosure <- function(options) {
 write_strata_abundance_by_enclosure <- function(options) {
   line_intercept <- readr::read_csv(options[["line-intercept-path"]], show_col_types = FALSE)
   species_stratum <- readr::read_csv(options[["species-stratum-path"]], show_col_types = FALSE)
-  point_line_with_stratum <- join_point_line_with_vegetation_metadata(line_intercept, species_stratum)
+  point_line_with_stratum <- join_sampling_with_vegetation_metadata(line_intercept, species_stratum)
   strata_abundance <- calculate_stratum_abundance_by_enclousure(point_line_with_stratum)
   readr::write_csv(strata_abundance, options[["results-path"]])
 }
