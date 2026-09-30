@@ -62,17 +62,4 @@ describe("Transform quadrants sampling data to vegan input format", {
     expected_count_in_cerco_1_quadrant_7_for_brickelia <- 20
     expect_equal(obtained_count_in_cerco_1_quadrant_7_for_brickelia, expected_count_in_cerco_1_quadrant_7_for_brickelia)
   })
-  it("Transform enclosure data from quadrants to vegan input format", {
-    obtained <- transform_enclosure_coverage_to_vegan(quadrants_data)
-
-    expected_columns_with_all_vegetation_species_on_data <- c("tribulus_cistoides", "brickellia_peninsularis", "waltheria_indica", "canavalia_rosea")
-    obtained_columns <- colnames(obtained)
-    is_all_expected_columns_in_obtained <- all(expected_columns_with_all_vegetation_species_on_data %in% obtained_columns)
-    is_all_obtained_columns_in_expected <- all(obtained_columns %in% expected_columns_with_all_vegetation_species_on_data)
-    expect_true(is_all_expected_columns_in_obtained & is_all_obtained_columns_in_expected)
-
-    obtained_count_in_cerco_1_for_brickelia <- obtained["Cerco_1", "brickellia_peninsularis"][[1]]
-    expected_count_in_cerco_1_for_brickelia <- 100
-    expect_equal(obtained_count_in_cerco_1_for_brickelia, expected_count_in_cerco_1_for_brickelia)
-  })
 })

@@ -6,7 +6,7 @@ calculate_diversity_indexes <- function(sampling_data) {
   colnames(df) <- index_list
   return(df)
 }
-transform_quadrants_enclosure_to_vegan <- function(quadrants_data) {
+transform_quadrants_enclosure_coverage_to_vegan <- function(quadrants_data) {
   vegetation <- drop_non_vegetation(quadrants_data)
   sites <- sanitize_enclousure_quadrants_names(vegetation)
   initialized_community <- initialize_community_matrix(vegetation, sites)
