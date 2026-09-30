@@ -35,6 +35,14 @@ write_diversity_indexes_by_enclosure <- function(options) {
     tibble::as_tibble(rownames = "enclosure")
   readr::write_csv(df, options[["results-path"]])
 }
+write_diversity_indexes_by_enclosure_from_coverage <- function(options) {
+  quadrants_data <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
+  vegan_input_format <- transform_enclosure_coverage_to_vegan(quadrants_data)
+  diversity_indexes <- calculate_diversity_indexes(vegan_input_format)
+  df <- diversity_indexes |>
+    tibble::as_tibble(rownames = "enclosure")
+  readr::write_csv(df, options[["results-path"]])
+}
 write_diversity_indexes_by_quadrant <- function(options) {
   quadrants_data <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
   vegan_input_format <- transform_quadrants_enclosure_coverage_to_vegan(quadrants_data)
