@@ -59,7 +59,7 @@ transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
   sites <- sanitize_enclousure_transect_names(vegetation)
   initialized_community <- initialize_community_matrix(vegetation, sites)
-  xxcount_sighted_species(initialized_community, vegetation, sites)
+  count_sighted_species(initialized_community, vegetation, sites)
 }
 transform_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
@@ -84,15 +84,7 @@ initialize_community_matrix <- function(vegetation, sites) {
   return(community)
 }
 
-xxcount_sighted_species <- function(community, vegetation, site_key) {
-  species_key <- sanitize_species_names(vegetation$Especie)
-  for (i in seq_along(species_key)) {
-    community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + 1
-  }
-  return(community)
-}
-count_sighted_species <- function(community, vegetation) {
-  site_key <- sanitize_enclousure_transect_names(vegetation)
+count_sighted_species <- function(community, vegetation, site_key) {
   species_key <- sanitize_species_names(vegetation$Especie)
   for (i in seq_along(species_key)) {
     community[site_key[i], species_key[i]] <- community[site_key[i], species_key[i]] + 1
