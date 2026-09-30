@@ -58,32 +58,20 @@ calculate_diversity_indexes <- function(sampling_data) {
 transform_intercept_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
   sites <- sanitize_enclousure_transect_names(vegetation)
-  initialized_community <- xxinitialize_community_matrix(vegetation, sites)
+  initialized_community <- initialize_community_matrix(vegetation, sites)
   count_sighted_species(initialized_community, vegetation)
 }
 transform_enclosure_to_vegan <- function(point_line_data) {
   vegetation <- drop_non_vegetation(point_line_data)
   sites <- vegetation$Cerco
-  community <- xxinitialize_community_matrix(vegetation, sites)
+  community <- initialize_community_matrix(vegetation, sites)
   species_key <- sanitize_species_names(vegetation$Especie)
   for (i in seq_along(species_key)) {
     community[vegetation$Cerco[i], species_key[i]] <- community[vegetation$Cerco[i], species_key[i]] + 1
   }
   return(community)
 }
-initialize_community_matrix <- function(vegetation) {
-  sites <- sort(unique(sanitize_enclousure_transect_names(vegetation)))
-  sorted_species <- sort(unique(vegetation$Especie))
-  species <- sanitize_species_names(sorted_species)
-  community <- matrix(
-    0,
-    nrow = length(sites),
-    ncol = length(species),
-    dimnames = list(sites, species)
-  )
-  return(community)
-}
-xxinitialize_community_matrix <- function(vegetation, sites) {
+initialize_community_matrix <- function(vegetation, sites) {
   unique_and_sorted_sites <- sort(unique(sites))
   sorted_species <- sort(unique(vegetation$Especie))
   species <- sanitize_species_names(sorted_species)
