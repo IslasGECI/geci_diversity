@@ -29,5 +29,5 @@ Remotes:
     IslasGECI/gecioptparse,
     IslasGECI/testtools,
 Type: Package
-Version: 0.1.0
+Version: 0.2.0
 Config/roxygen2/version: 8.1.0
