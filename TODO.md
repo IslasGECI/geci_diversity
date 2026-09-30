@@ -7,7 +7,7 @@
 - [x] Compute strata abundance by enclosure (`calculate_stratum_abundance_by_enclousure`), including bare ground (`Roca_Suelo`) and total vegetation.
 - [x] Add line-intercept CLI writers (`write_species_abundance_from_line_intercept_by_enclosure`, `write_strata_abundance_from_line_intercept_by_enclosure`) and `--line-intercept-path` / `--species-stratum-path` options.
 - [x] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure and transect.
-- [ ] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure.
+- [x] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure.
 - [ ] Implement quadrat cover, height, and diversity detail functions.
 - [ ] Implement enclosure-level quadrat summaries and pooled gamma diversity.
 - [ ] Add roxygen documentation and README examples.
@@ -32,7 +32,7 @@
 - Expose one function per result table rather than a monolithic report-producing function.
 - The planned first-increment function families are:
   - [x] line-intercept species abundance and vegetation-group abundance;
-  - [ ] line-intercept diversity indexes (Simpson and Shannon);
+  - [x] line-intercept diversity indexes (Simpson and Shannon);
   - [ ] tidy quadrat cover, height, and diversity detail functions;
   - [ ] separate enclosure-level cover, height, median per-quadrant diversity, and pooled gamma diversity summary functions.
 - Helper functions remain internal unless a distinct public use case emerges.
@@ -79,7 +79,7 @@
 - Return four separate wide tables, with one row per enclosure:
   1. [x] species abundance;
   2. [x] vegetation-group abundance;
-  3. [ ] vegetation diversity.
+  3. [x] vegetation diversity.
 - Dynamic species/category headers are sanitized, alphabetically ordered, and clearly prefixed for count versus percent. Exact species text remains available in tidy outputs where applicable.
 - Species absent from an enclosure receive missing count/percent values in the wide intercept table.
 - Use `vegan` for diversity.
