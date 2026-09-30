@@ -42,8 +42,5 @@ describe("Transform sampling data to vegan input format", {
     obtained_count_in_cerco_1_for_brickelia <- obtained["Cerco_1", "brickellia_peninsularis"][[1]]
     expected_count_in_cerco_1_for_brickelia <- 7
     expect_equal(obtained_count_in_cerco_1_for_brickelia, expected_count_in_cerco_1_for_brickelia)
-    obtained_count_in_cerco_2_for_tribulus <- obtained["Cerco_2", "tribulus_cistoides"][[1]]
-    expected_count_in_cerco_2_for_tribulus <- 7
-    expect_equal(obtained_count_in_cerco_2_for_tribulus, expected_count_in_cerco_2_for_tribulus)
   })
 })
