@@ -9,4 +9,13 @@ describe("calculate coverage and height by enclosure from quadrants data", {
     expected_shape <- c(2, 5)
     expect_equal(expected_shape, obtained_shape)
   })
+  it("calculate mean height per species by enclosure from quadrants data", {
+    obtained <- compute_species_mean_height_by_enclosure(quadrants_data)
+    obtained_height_cerco_1_brickellia <- obtained["Cerco_1", "Brickellia peninsularis"][[1]]
+    expected_height_cerco_1_brickellia <- 320 / 3
+    expect_equal(obtained_height_cerco_1_brickellia, expected_height_cerco_1_brickellia)
+    obtained_shape <- dim(obtained)
+    soil_not_in_df <- !"Suelo" %in% colnames(obtained)
+    expect_true(soil_not_in_df)
+  })
 })
