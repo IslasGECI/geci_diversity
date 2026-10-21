@@ -10,6 +10,13 @@ compute_species_mean_height_by_enclosure <- function(quadrants_data) {
   reshape_by_enclosure(mean_height_by_species, "mean_height")
 }
 
+compute_vegetation_mean_height_by_enclosure <- function(quadrants_data) {
+  mean_height_by_enclosure <- compute_mean_vegetation_height_by_enclosure(
+    quadrants_data
+  )
+  as_enclosure_table(mean_height_by_enclosure)
+}
+
 compute_total_coverage_by_species <- function(quadrants_data) {
   dplyr::summarise(
     quadrants_data,
@@ -39,9 +46,22 @@ compute_mean_height_by_species <- function(quadrants_data) {
   )
 }
 
+compute_mean_vegetation_height_by_enclosure <- function(quadrants_data) {
+  dplyr::summarise(
+    drop_non_vegetation(quadrants_data),
+    mean_height = mean(Altura, na.rm = TRUE),
+    .by = Cerco
+  )
+}
+
+as_enclosure_table <- function(summary_by_enclosure) {
+  enclosure_table <- as.data.frame(summary_by_enclosure)
+  rownames(enclosure_table) <- enclosure_table$Cerco
+  enclosure_table$Cerco <- NULL
+  enclosure_table
+}
+
 reshape_by_enclosure <- function(long_table, value_column) {
   wide <- reshape2::dcast(long_table, Cerco ~ Especie, value.var = value_column)
-  rownames(wide) <- wide$Cerco
-  wide$Cerco <- NULL
-  wide
+  as_enclosure_table(wide)
 }
