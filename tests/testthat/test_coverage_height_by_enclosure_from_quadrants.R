@@ -14,6 +14,9 @@ describe("calculate coverage and height by enclosure from quadrants data", {
     obtained_coverage_cerco_2_vegetation <- obtained["Cerco_2", "vegetation"][[1]]
     expected_coverage_cerco_2_vegetation <- 147 / 4
     expect_equal(obtained_coverage_cerco_2_vegetation, expected_coverage_cerco_2_vegetation)
+    obtained_coverage_cerco_2_non_vegetation <- obtained["Cerco_2", "non_vegetation"][[1]]
+    expected_coverage_cerco_2_non_vegetation <- 186 / 4
+    expect_equal(obtained_coverage_cerco_2_non_vegetation, expected_coverage_cerco_2_non_vegetation)
     obtained_shape <- dim(obtained)
     expected_shape <- c(2, 2)
     expect_equal(expected_shape, obtained_shape)
