@@ -1,4 +1,4 @@
-calculate_species_coverage_by_enclosure <- function(quadrants_data) {
+compute_species_coverage_by_enclosure <- function(quadrants_data) {
   total_coverage <- dplyr::summarise(
     quadrants_data,
     total_coverage = sum(Cobertura),
