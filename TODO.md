@@ -8,10 +8,13 @@
 - [x] Add line-intercept CLI writers (`write_species_abundance_from_line_intercept_by_enclosure`, `write_strata_abundance_from_line_intercept_by_enclosure`) and `--line-intercept-path` / `--species-stratum-path` options.
 - [x] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure and transect.
 - [x] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure.
+- [ ] Implement per-quadrant detail tables (cover, vegetation height, and diversity) from quadrat data.
 - [ ] Implement enclosure-level quadrat summaries:
-  - [ ] Cover by enclosure and species
-  - [ ] Mean height by species by enclosure
-  - [ ] Mean height of vegetation by enclosure
+  - [x] Cover by enclosure and species (`compute_species_percentage_coverage_by_enclosure`).
+  - [x] Mean height by species by enclosure (`compute_species_mean_height_by_enclosure`).
+  - [x] Mean height of vegetation by enclosure (`compute_vegetation_mean_height_by_enclosure`).
+  - [ ] Vegetation and non-vegetation cover by enclosure (`compute_vegetation_percentage_coverage_by_enclosure`).
+  - [ ] Median central estimates and percentile-bootstrap confidence intervals for the enclosure summaries.
 - [ ] Add roxygen documentation and README examples.
 - [ ] Add Rscript CLI entry point and full CLI contract tests.
 
@@ -111,6 +114,12 @@
 
 ### Enclosure-level quadrat summaries
 
+- The wide enclosure tables implemented so far report pooled values, one row per enclosure and one column per category; the median central estimate and the percentile-bootstrap confidence intervals described below are still pending.
+- Cover tables pool the recorded cover of a category across the enclosure quadrants and normalize it by the enclosure quadrat count, so each value is the mean cover per quadrat of that category.
+- `compute_species_percentage_coverage_by_enclosure` keeps one column per observed species, including the original ground categories.
+- `compute_species_mean_height_by_enclosure` keeps one column per observed vegetation species with the mean of its available heights.
+- `compute_vegetation_mean_height_by_enclosure` keeps one column (`mean_height`) with the mean of the vegetation heights observed in the enclosure.
+- The grouped cover table reports `vegetation` and `non_vegetation`, where `non_vegetation` is the complement of vegetation (soil, rock, and litter).
 - Every enclosure has more than one quadrat; implement a safe fallback for degenerate test input.
 - Use the median as the central estimate for summaries calculated from per-quadrant cover, height, richness, Shannon, and Simpson values. Do not apply this rule to pooled gamma diversity.
 - Use percentile-bootstrap confidence intervals for all numeric enclosure summaries where estimable.
