@@ -9,6 +9,15 @@ describe("calculate coverage and height by enclosure from quadrants data", {
     expected_shape <- c(2, 5)
     expect_equal(expected_shape, obtained_shape)
   })
+  it("calculate coverage vegetation by enclosure from quadrants data", {
+    obtained <- compute_species_percentage_coverage_by_enclosure(quadrants_data)
+    obtained_coverage_cerco_2_vegetation <- obtained["Cerco_2", "vegetation"][[1]]
+    expected_coverage_cerco_2_vegetation <- 147 / 4
+    expect_equal(obtained_coverage_cerco_2_vegetation, expected_coverage_cerco_2_vegetation)
+    obtained_shape <- dim(obtained)
+    expected_shape <- c(2, 2)
+    expect_equal(expected_shape, obtained_shape)
+  })
   it("calculate mean height per species by enclosure from quadrants data", {
     obtained <- compute_species_mean_height_by_enclosure(quadrants_data)
     obtained_height_cerco_1_brickellia <- obtained["Cerco_1", "Brickellia peninsularis"][[1]]
