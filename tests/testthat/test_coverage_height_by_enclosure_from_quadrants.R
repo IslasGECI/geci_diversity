@@ -10,7 +10,7 @@ describe("calculate coverage and height by enclosure from quadrants data", {
     expect_equal(expected_shape, obtained_shape)
   })
   it("calculate coverage vegetation by enclosure from quadrants data", {
-    obtained <- compute_species_percentage_coverage_by_enclosure(quadrants_data)
+    obtained <- compute_vegetation_percentage_coverage_by_enclosure(quadrants_data)
     obtained_coverage_cerco_2_vegetation <- obtained["Cerco_2", "vegetation"][[1]]
     expected_coverage_cerco_2_vegetation <- 147 / 4
     expect_equal(obtained_coverage_cerco_2_vegetation, expected_coverage_cerco_2_vegetation)
