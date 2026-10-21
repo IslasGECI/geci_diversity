@@ -8,8 +8,10 @@
 - [x] Add line-intercept CLI writers (`write_species_abundance_from_line_intercept_by_enclosure`, `write_strata_abundance_from_line_intercept_by_enclosure`) and `--line-intercept-path` / `--species-stratum-path` options.
 - [x] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure and transect.
 - [x] Implement line-intercept diversity indexes (Simpson and Shannon) by enclousure.
-- [ ] Implement quadrat cover, height, and diversity detail functions.
-- [ ] Implement enclosure-level quadrat summaries and pooled gamma diversity.
+- [ ] Implement enclosure-level quadrat summaries:
+  - [ ] Cover by enclosure and species
+  - [ ] Mean height by species by enclosure
+  - [ ] Mean height of vegetation by enclosure
 - [ ] Add roxygen documentation and README examples.
 - [ ] Add Rscript CLI entry point and full CLI contract tests.
 
@@ -34,7 +36,6 @@
   - [x] line-intercept species abundance and vegetation-group abundance;
   - [x] line-intercept diversity indexes (Simpson and Shannon);
   - [ ] tidy quadrat cover, height, and diversity detail functions;
-  - [ ] separate enclosure-level cover, height, median per-quadrant diversity, and pooled gamma diversity summary functions.
 - Helper functions remain internal unless a distinct public use case emerges.
 - High-level return structure remains intentionally deferred.
 
