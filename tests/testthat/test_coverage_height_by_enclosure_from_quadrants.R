@@ -19,7 +19,7 @@ describe("calculate coverage and height by enclosure from quadrants data", {
   })
   it("calculate mean height vegetation by enclosure from quadrants data", {
     obtained <- compute_vegetation_mean_height_by_enclosure(quadrants_data)
-    obtained_height_cerco_1 <- obtained["Cerco_1"][[1]]
+    obtained_height_cerco_1 <- obtained["Cerco_1", ]
     expected_height_cerco_1 <- 543.5 / 9
     expect_equal(obtained_height_cerco_1, expected_height_cerco_1)
     obtained_shape <- dim(obtained)
