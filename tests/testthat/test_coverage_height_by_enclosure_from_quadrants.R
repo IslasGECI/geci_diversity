@@ -14,8 +14,16 @@ describe("calculate coverage and height by enclosure from quadrants data", {
     obtained_height_cerco_1_brickellia <- obtained["Cerco_1", "Brickellia peninsularis"][[1]]
     expected_height_cerco_1_brickellia <- 320 / 3
     expect_equal(obtained_height_cerco_1_brickellia, expected_height_cerco_1_brickellia)
-    obtained_shape <- dim(obtained)
     soil_not_in_df <- !"Suelo" %in% colnames(obtained)
     expect_true(soil_not_in_df)
+  })
+  it("calculate mean height vegetation by enclosure from quadrants data", {
+    obtained <- compute_vegetation_mean_height_by_enclosure(quadrants_data)
+    obtained_height_cerco_1 <- obtained["Cerco_1"][[1]]
+    expected_height_cerco_1 <- 543.5 / 9
+    expect_equal(obtained_height_cerco_1, expected_height_cerco_1)
+    obtained_shape <- dim(obtained)
+    expected_shape <- c(2, 1)
+    expect_equal(expected_shape, obtained_shape)
   })
 })
