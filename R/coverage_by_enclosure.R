@@ -1,8 +1,13 @@
-compute_species_coverage_by_enclosure <- function(quadrants_data) {
+compute_species_percentage_coverage_by_enclosure <- function(quadrants_data) {
   total_coverage <- compute_total_coverage_by_species(quadrants_data)
   n_quadrats <- compute_n_quadrats_by_enclosure(quadrants_data)
-  coverage <- compute_mean_coverage_by_species(total_coverage, n_quadrats)
-  reshape_by_enclosure(coverage, "coverage")
+  coverage <- compute_percentage_coverage_by_species(total_coverage, n_quadrats)
+  reshape_by_enclosure(coverage, "percentage_coverage")
+}
+
+compute_species_mean_height_by_enclosure <- function(quadrants_data) {
+  mean_height_by_species <- compute_mean_height_by_species(quadrants_data)
+  reshape_by_enclosure(mean_height_by_species, "mean_height")
 }
 
 compute_total_coverage_by_species <- function(quadrants_data) {
@@ -21,14 +26,9 @@ compute_n_quadrats_by_enclosure <- function(quadrants_data) {
   )
 }
 
-compute_mean_coverage_by_species <- function(total_coverage, n_quadrats) {
+compute_percentage_coverage_by_species <- function(total_coverage, n_quadrats) {
   dplyr::left_join(total_coverage, n_quadrats, by = "Cerco") |>
-    dplyr::mutate(coverage = total_coverage / n_quadrats)
-}
-
-compute_species_mean_height_by_enclosure <- function(quadrants_data) {
-  mean_height_by_species <- compute_mean_height_by_species(quadrants_data)
-  reshape_by_enclosure(mean_height_by_species, "mean_height")
+    dplyr::mutate(percentage_coverage = total_coverage / n_quadrats)
 }
 
 compute_mean_height_by_species <- function(quadrants_data) {
