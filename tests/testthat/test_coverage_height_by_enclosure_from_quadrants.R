@@ -5,5 +5,8 @@ describe("calculate coverage and height by enclosure from quadrants data", {
     obtained_coverage_cerco_2_walteria <- obtained["Cerco_2", "Waltheria indica"][[1]]
     expected_coverage_cerco_2_walteria <- 9 / 4
     expect_equal(obtained_coverage_cerco_2_walteria, expected_coverage_cerco_2_walteria)
+    obtained_shape <- dim(obtained)
+    expected_shape <- c(2, 5)
+    expect_equal(expected_shape, obtained_shape)
   })
 })
