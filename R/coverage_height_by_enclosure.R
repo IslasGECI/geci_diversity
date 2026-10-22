@@ -1,10 +1,3 @@
-compute_species_percentage_coverage_by_enclosure <- function(quadrants_data) {
-  total_coverage <- compute_total_coverage_by_species(quadrants_data)
-  n_quadrats <- compute_n_quadrats_by_enclosure(quadrants_data)
-  coverage <- compute_percentage_coverage_by_species(total_coverage, n_quadrats)
-  reshape_by_enclosure(coverage, "percentage_coverage")
-}
-
 compute_vegetation_percentage_coverage_by_enclosure <- function(quadrants_data) {
   coverage_group <- dplyr::mutate(
     quadrants_data,
@@ -15,6 +8,13 @@ compute_vegetation_percentage_coverage_by_enclosure <- function(quadrants_data) 
     )
   )
   compute_species_percentage_coverage_by_enclosure(coverage_group)
+}
+
+compute_species_percentage_coverage_by_enclosure <- function(quadrants_data) {
+  total_coverage <- compute_total_coverage_by_species(quadrants_data)
+  n_quadrats <- compute_n_quadrats_by_enclosure(quadrants_data)
+  coverage <- compute_percentage_coverage_by_species(total_coverage, n_quadrats)
+  reshape_by_enclosure(coverage, "percentage_coverage")
 }
 
 compute_species_mean_height_by_enclosure <- function(quadrants_data) {
