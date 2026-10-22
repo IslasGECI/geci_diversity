@@ -16,6 +16,14 @@ describe("CLI writing functions for coverage and height by enclosure", {
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)
   })
+  it("write vegetation height by enclosure", {
+    output_path <- "/workdir/tests/vegetation_height_by_enclosure.csv"
+    testtools::if_exist_remove(output_path)
+    options <- list("sampling-data-path" = quadrants_path, "results-path" = output_path)
+    write_vegetation_mean_height_by_enclosure(options)
+    expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
+  })
   it("write species height by enclosure", {
     output_path <- "/workdir/tests/species_height_by_enclosure.csv"
     testtools::if_exist_remove(output_path)
