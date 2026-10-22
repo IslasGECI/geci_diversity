@@ -8,6 +8,14 @@ describe("CLI writing functions for coverage and height by enclosure", {
     expect_true(testtools::exist_output_file(output_path))
     testtools::if_exist_remove(output_path)
   })
+  it("write species coverage by enclosure", {
+    output_path <- "/workdir/tests/vegetation_coverage_by_enclosure.csv"
+    testtools::if_exist_remove(output_path)
+    options <- list("sampling-data-path" = quadrants_path, "results-path" = output_path)
+    write_species_percentage_coverage_by_enclosure(options)
+    expect_true(testtools::exist_output_file(output_path))
+    testtools::if_exist_remove(output_path)
+  })
 })
 describe("Cli for module", {
   a_community_counts_path <- "/workdir/tests/data/community_a_for_tests.csv"
