@@ -69,6 +69,13 @@ write_strata_abundance_by_enclosure <- function(options) {
   strata_abundance <- calculate_stratum_abundance_by_enclousure(point_line_with_stratum)
   readr::write_csv(strata_abundance, options[["results-path"]])
 }
+write_vegetation_mean_height_by_enclosure <- function(options) {
+  quadrants_data <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
+  mean_height <- compute_vegetation_mean_height_by_enclosure(quadrants_data)
+  tibble::as_tibble(mean_height, rownames = "enclosure") |>
+    readr::write_csv(options[["results-path"]])
+}
+
 write_species_mean_height_by_enclosure <- function(options) {
   quadrants_data <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
   mean_height <- compute_species_mean_height_by_enclosure(quadrants_data)
