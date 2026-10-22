@@ -69,6 +69,13 @@ write_strata_abundance_by_enclosure <- function(options) {
   strata_abundance <- calculate_stratum_abundance_by_enclousure(point_line_with_stratum)
   readr::write_csv(strata_abundance, options[["results-path"]])
 }
+write_vegetation_percentage_coverage_by_enclosure <- function(options) {
+  quadrants_data <- readr::read_csv(options[["sampling-data-path"]], show_col_types = FALSE)
+  coverage <- compute_vegetation_percentage_coverage_by_enclosure(quadrants_data)
+  tibble::as_tibble(coverage, rownames = "enclosure") |>
+    readr::write_csv(options[["results-path"]])
+}
+
 get_domain_specific_options <- function() {
   results_path <- gecioptparse::character_option(c("-r", "--results-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
   newest_path <- gecioptparse::character_option(c("-n", "--newest-count-path"), default = "", help = "File path of the newest count")
