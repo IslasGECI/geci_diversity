@@ -5,6 +5,18 @@ compute_species_percentage_coverage_by_enclosure <- function(quadrants_data) {
   reshape_by_enclosure(coverage, "percentage_coverage")
 }
 
+compute_vegetation_percentage_coverage_by_enclosure <- function(quadrants_data) {
+  coverage_group <- dplyr::mutate(
+    quadrants_data,
+    Especie = dplyr::if_else(
+      Especie %in% c("Suelo", "Roca", "Hojarasca"),
+      "non_vegetation",
+      "vegetation"
+    )
+  )
+  compute_species_percentage_coverage_by_enclosure(coverage_group)
+}
+
 compute_species_mean_height_by_enclosure <- function(quadrants_data) {
   mean_height_by_species <- compute_mean_height_by_species(quadrants_data)
   reshape_by_enclosure(mean_height_by_species, "mean_height")
